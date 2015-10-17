@@ -38,17 +38,8 @@ pygame.init()
 pygame.mixer.init()
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(r13,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(r39,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(r67,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(r72,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-
-GPIO.setup(s38,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(s47,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(s68,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(s99,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-
-GPIO.setup(button,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+for pin in [r13, r39, r67, r72, s38, s47, s68, s99, button]:
+	GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 GPIO.setup(d1,GPIO.OUT)
 GPIO.setup(d2,GPIO.OUT)
