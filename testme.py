@@ -38,7 +38,12 @@ pygame.init()
 pygame.mixer.init()
 
 GPIO.setmode(GPIO.BCM)
-for pin in [r13, r39, r67, r72, s38, s47, s68, s99, button]:
+
+# input pins
+ladders = [r13, r39, r67, r72]
+snakes = [s38, s47, s68, s99]
+
+for pin in ladders + snakes + [button]:
 	GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 leds = [d1, d2, d3, d4, d5, d6]
@@ -72,38 +77,18 @@ def dice():
 
 
 while True:
-    if GPIO.input(r13) == True:
-        print("button pressed")
-        sleep(0.5)
-        play_sound(ladder)
-    elif GPIO.input(r39) == True:
-    	print("button pressed")
-        sleep(0.5)
-        play_sound(ladder)
-    elif GPIO.input(r67) == True:
-    	print("button pressed")
-        sleep(0.5)
-        play_sound(ladder)
-    elif GPIO.input(r72) == True:
-    	print("button pressed")
-        sleep(0.5)
-        play_sound(ladder)
-    elif GPIO.input(s38) == True:
-    	print("button pressed")
-        sleep(0.5)
-        play_sound(snake)
-    elif GPIO.input(s47) == True:
-    	print("button pressed")
-        sleep(0.5)
-        play_sound(snake)
-    elif GPIO.input(s68) == True:
-    	print("button pressed")
-        sleep(0.5)
-        play_sound(snake)
-    elif GPIO.input(s99) == True:
-    	print("button pressed")
-        sleep(0.5)
-        play_sound(snake)
-    elif GPIO.input(button) == True:
-    	dice()
-    	sleep(1)
+	for pin in ladders:
+		if GPIO.input(pin):
+			print("button pressed")
+			sleep(0.5)
+			play_sound(ladder)
+	
+	for pin in snakes:
+		if GPIO.input(pin):
+			print("button pressed")
+			sleep(0.5)
+			play_sound(snake)
+	
+	if GPIO.input(button):
+		dice()
+		sleep(1)
