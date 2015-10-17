@@ -41,12 +41,9 @@ GPIO.setmode(GPIO.BCM)
 for pin in [r13, r39, r67, r72, s38, s47, s68, s99, button]:
 	GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-GPIO.setup(d1,GPIO.OUT)
-GPIO.setup(d2,GPIO.OUT)
-GPIO.setup(d3,GPIO.OUT)
-GPIO.setup(d4,GPIO.OUT)
-GPIO.setup(d5,GPIO.OUT)
-GPIO.setup(d6,GPIO.OUT)
+leds = [d1, d2, d3, d4, d5, d6]
+for led in leds:
+	GPIO.setup(led, GPIO.OUT)
 
 GPIO.output(d2,0)
 
