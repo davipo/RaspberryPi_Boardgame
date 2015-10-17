@@ -54,64 +54,23 @@ def play_sound(x):
 	while pygame.mixer.get_busy() == True:
 		continue
 
+
 #Function to roll dice
 def dice():
 	roll = randint(1,6)
 	print(roll)
-	if roll == 1:
-		GPIO.output(d1,1)
-		sleep(3)
-		GPIO.output(d1,0)
-	elif roll == 2:
-		GPIO.output(d1,1)
-		GPIO.output(d2,1)
-		sleep(3)
-		GPIO.output(d1,0)
-		GPIO.output(d2,0)
-	elif roll == 3:
-		GPIO.output(d1,1)
-		GPIO.output(d2,1)
-		GPIO.output(d3,1)
-		sleep(3)
-		GPIO.output(d1,0)
-		GPIO.output(d2,0)
-		GPIO.output(d3,0)	
-	elif roll == 4:	
-		GPIO.output(d1,1)
-		GPIO.output(d2,1)
-		GPIO.output(d3,1)
-		GPIO.output(d4,1)
-		sleep(3)
-		GPIO.output(d1,0)
-		GPIO.output(d2,0)
-		GPIO.output(d3,0)
-		GPIO.output(d4,0)	
-	elif roll == 5:	
-		GPIO.output(d1,1)
-		GPIO.output(d2,1)
-		GPIO.output(d3,1)
-		GPIO.output(d4,1)
-		GPIO.output(d5,1)
-		sleep(3)
-		GPIO.output(d1,0)
-		GPIO.output(d2,0)
-		GPIO.output(d3,0)
-		GPIO.output(d4,0)	
-		GPIO.output(d5,0)
-	elif roll == 6:	
-		GPIO.output(d1,1)
-		GPIO.output(d2,1)
-		GPIO.output(d3,1)
-		GPIO.output(d4,1)
-		GPIO.output(d5,1)
-		GPIO.output(d6,1)
-		sleep(3)
-		GPIO.output(d1,0)
-		GPIO.output(d2,0)
-		GPIO.output(d3,0)
-		GPIO.output(d4,0)	
-		GPIO.output(d5,0)
-		GPIO.output(d6,0)			
+	
+	# turn on the number of LEDs specified by roll
+	for led in leds[:roll]:
+		GPIO.output(led, 1)
+	
+	sleep(3)
+	
+	# turn them off
+	for led in leds[:roll]:
+		GPIO.output(led, 0)
+
+
 while True:
     if GPIO.input(r13) == True:
         print("button pressed")
